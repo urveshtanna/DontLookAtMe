@@ -64,7 +64,6 @@ class PeekCountingForegroundService : Service() {
             .setSmallIcon(icon)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_LOW)
-            .addAction(R.drawable.ic_stop_black_24dp, "Stop", pStopSelf)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
@@ -127,7 +126,6 @@ class PeekCountingForegroundService : Service() {
          * Start tracking the detected face instance within the face overlay.
          */
         override fun onNewItem(faceId: Int, face: Face?) {
-            faceMap.clear();
             if (face != null) {
                 faceMap.put(face.id, face);
             }
@@ -142,6 +140,7 @@ class PeekCountingForegroundService : Service() {
          * Update the position/characteristics of the face within the overlay.
          */
         override fun onUpdate(detectionResults: Detector.Detections<Face>?, face: Face?) {
+            Log.e(TAG, "onUpdate "+detectionResults?.detectedItems?.size())
             if (face != null) {
                 faceMap.put(face.id, face);
             }
